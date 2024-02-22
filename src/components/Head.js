@@ -44,6 +44,7 @@ const Head = () => {
             clearTimeout(apiCallingTimer);
         };
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchQuery]);
 
     const dispatch = useDispatch();

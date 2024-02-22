@@ -1,7 +1,5 @@
-let replyCounterId = 1;
-
 const Comment = ({ userComment }) => {
-    const { name, imageURL, comment, replies } = userComment;
+    const { name, imageURL, comment } = userComment;
     return (
         <div>
             <div className="flex items-center gap-x-2 ps-2 my-1 py-3 rounded-md bg-slate-100">

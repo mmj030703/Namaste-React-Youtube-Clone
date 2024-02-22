@@ -15,6 +15,7 @@ const LiveChatMessagesList = () => {
         return () => {
             clearInterval(liveChatInterval);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getLiveChats = async () => {
