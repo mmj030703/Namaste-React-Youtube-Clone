@@ -1,13 +1,24 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hover-scrollbar-visible:hover {
+    overflow-y: scroll;
+    scrollbar-width: 1px;
+    -ms-overflow-style: 1px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.scrollbar-hidden {
+    overflow-y: hidden;
+    scrollbar-width: 0;
+    -ms-overflow-style: none;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.hover-scrollbar-visible:hover::-webkit-scrollbar {
+    width: 7px;
+}
+
+.hover-scrollbar-visible:hover::-webkit-scrollbar-thumb {
+    background-color: #717a8a;
 }
