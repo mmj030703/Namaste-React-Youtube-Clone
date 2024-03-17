@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { YOUTUBE_POPULAR_VIDEOS_API_URL } from "../utils/constants";
 import VideoCard from "./VideoCard";

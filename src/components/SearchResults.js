@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import SearchResultItem from './SearchResultItem';
 import { YOUTUBE_SEARCH_VIDEOS_API_URL } from '../utils/constants';
