@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const homepageVideosSlice = createSlice({
     'name': 'homepageVideosSlice',
@@ -7,7 +7,6 @@ const homepageVideosSlice = createSlice({
     },
     'reducers': {
         updateVideos: (state, action) => {
-            // state.videos.length = 0;
             console.log(action.payload);
             state.videos.push(...action.payload);
         }
