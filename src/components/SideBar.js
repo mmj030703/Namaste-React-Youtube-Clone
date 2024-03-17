@@ -1,14 +1,11 @@
 import { faCirclePlay, faHouse, faFilm, faAngleRight, faUser, faClockRotateLeft, faPlay, faClock, faAngleDown, faFire, faBagShopping, faMusic, faClapperboard, faTowerBroadcast, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import MiniSideBar from "./MiniSideBar";
 import { Link } from "react-router-dom";
-
 const SideBar = () => {
-    const { isSideBarOpen, showSmallMenu } = useSelector(store => store.toggleSidebar);
+    const { isSideBarOpen } = useSelector(store => store.toggleSidebar);
 
-    if (!isSideBarOpen && showSmallMenu) return <MiniSideBar />;
-    else if (!isSideBarOpen) return null;
+    if (!isSideBarOpen) return null;
 
     return (
         <div className="relative">

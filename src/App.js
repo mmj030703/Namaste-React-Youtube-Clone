@@ -6,6 +6,8 @@ import appStore from './utils/store/appStore';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainContainer from './components/MainContainer';
 import WatchVideoPage from './components/WatchVideoPage';
+import SearchResults from './components/SearchResults';
+import Header from './components/Header';
 
 /** Component Design
  * Header
@@ -18,19 +20,25 @@ import WatchVideoPage from './components/WatchVideoPage';
  *      VideoCard
  */
 
-const appRouter = createBrowserRouter([
+const mainRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Body />,
+    element: <div>
+      <Header />
+      <Body />
+    </div>,
     children: [
       {
         path: '/',
         element: <MainContainer />
-      }
-      ,
+      },
       {
         path: 'watch',
         element: <WatchVideoPage />
+      },
+      {
+        path: 'results',
+        element: <SearchResults />
       }
     ]
   }
@@ -39,14 +47,15 @@ const appRouter = createBrowserRouter([
 function App() {
   return (
     <Provider store={appStore}>
-      <div>
-        <Head />
-        <RouterProvider router={appRouter}>
+      <RouterProvider router={mainRouter}>
+        <div>
+          <Header />
           <Body />
-        </RouterProvider>
-      </div>
+        </div>
+      </RouterProvider>
     </Provider>
   );
 }
+
 
 export default App;

@@ -4,24 +4,30 @@ const toggleSidebarSlice = createSlice({
     'name': 'toggleSidebar',
     'initialState': {
         isSideBarOpen: true,
-        showSmallMenu: false
+        isMiniSideBarOpen: false
     },
     reducers: {
-        toggleSideBar: (state) => {
-            state.isSideBarOpen = !state.isSideBarOpen;
-        },
-        toggleMiniSideBar: (state) => {
-            state.showSmallMenu = !state.showSmallMenu;
+        openSideBar: (state) => {
+            state.isSideBarOpen = true;
         },
         removeSideBar: (state) => {
             state.isSideBarOpen = false;
         },
+        toggleSideBar: (state) => {
+            state.isSideBarOpen = !state.isSideBarOpen;
+        },
+        openMiniSideBar: (state) => {
+            state.isMiniSideBarOpen = true;
+        },
         removeMiniSideBar: (state) => {
-            state.showSmallMenu = false;
-        }
+            state.isMiniSideBarOpen = false;
+        },
+        toggleMiniSideBar: (state) => {
+            state.isMiniSideBarOpen = !state.isMiniSideBarOpen;
+        },
     }
 });
 
-export const { toggleSideBar, removeSideBar, removeMiniSideBar, toggleMiniSideBar } = toggleSidebarSlice.actions;
+export const { openSideBar, toggleSideBar, removeSideBar, openMiniSideBar, removeMiniSideBar, toggleMiniSideBar } = toggleSidebarSlice.actions;
 
 export default toggleSidebarSlice.reducer;

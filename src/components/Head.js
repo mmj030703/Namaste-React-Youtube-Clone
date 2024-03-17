@@ -1,18 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faFaceSmile, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMiniSideBar, toggleSideBar } from '../utils/store/slices/toggleSidebarSlice';
+import { openSideBar, removeSideBar } from '../utils/store/slices/toggleSidebarSlice';
 import { useEffect, useState } from 'react';
 import { YOUTUBE_SUGGESTIONS_API_URL } from '../utils/constants';
 import { addCache } from '../utils/store/slices/searchSuggestionCacheSlice';
+import SuggestionItem from './SuggestionItem';
+import { Link, useNavigate } from 'react-router-dom';
 
 let suggestionCounterId = 1;
 
 const Head = () => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [isSearchQueryListOpen, setIsSearchQueryListOpen] = useState(false);
     const [suggestionList, setSuggestionList] = useState([]);
+    const navigate = useNavigate();
     const searchSuggestionsCache = useSelector(store => store.searchSuggestionsCache);
+    const { isSideBarOpen } = useSelector(store => store.toggleSidebar);
 
     useEffect(() => {
         //* Debounce Logic for improving the performance of app
@@ -25,7 +28,6 @@ const Head = () => {
                 setSuggestionList(searchSuggestionsCache[searchQuery]);
             }
             else {
-                console.log(searchQuery);
                 getSuggestions();
             }
         }, 200);
@@ -50,8 +52,16 @@ const Head = () => {
     const dispatch = useDispatch();
 
     const handleSidebarToggle = (e) => {
-        dispatch(toggleSideBar());
-        dispatch(toggleMiniSideBar());
+        if (isSideBarOpen) {
+            dispatch(removeSideBar());
+        } else {
+            dispatch(openSideBar());
+        }
+    };
+
+    const handleSuggestionClick = (suggestion, e) => {
+        setSearchQuery("");
+        navigate('/results?search_query=' + suggestion);
     };
 
     return (
@@ -59,7 +69,7 @@ const Head = () => {
             <div className='w-full flex items-center justify-between bg-white fixed top-0 z-20 px-8 pt-1 pb-2'>
                 <div className='flex items-center gap-x-7'>
                     <FontAwesomeIcon onClick={handleSidebarToggle} className='cursor-pointer text-xl' icon={faBars} />
-                    <a href="/"><img src='/assets/youtube-image.jpg' className='h-[25px]' alt='Youtube Icon' /></a>
+                    <Link to="/"><img src='/assets/youtube-image.jpg' className='h-[25px]' alt='Youtube Icon' /></Link>
                 </div>
                 <div className='flex'>
                     <div className='relative'>
@@ -69,12 +79,15 @@ const Head = () => {
                             className='w-[550px] ps-5 pe-3 py-[7px] focus-within:outline-blue-600 border border-e-0 border-1 border-slate-400 rounded-s-full'
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            onFocus={(e) => setIsSearchQueryListOpen(true)}
-                            onBlur={(e) => setIsSearchQueryListOpen(false)}
                         />
-                        {isSearchQueryListOpen && <div className={`${suggestionList.length ? 'block' : 'none'} w-full absolute bg-white shadow-[0px_3px_4px_rgba(0,0,0,0.7)] rounded-lg mt-1`}>
+                        {<div className={`${suggestionList.length ? 'block' : 'none'} w-full absolute bg-white shadow-[0px_3px_4px_rgba(0,0,0,0.7)] rounded-lg mt-1`}>
                             <ul>
-                                {suggestionList.map(suggestion => <li key={suggestionCounterId++} className='px-2 py-2'><FontAwesomeIcon className='text-slate-400 mr-3' icon={faSearch} /> {suggestion}</li>)}
+                                {
+                                    suggestionList.map(suggestion =>
+                                        <li onClick={(e) => handleSuggestionClick(suggestion, e)} className='cursor-pointer'>
+                                            <SuggestionItem key={suggestionCounterId++} suggestion={suggestion} />
+                                        </li>
+                                    )}
                             </ul>
                         </div>}
                     </div>
