@@ -6,8 +6,8 @@ function MainContainer() {
     const isSideBarOpen = useSelector(store => store.toggleSidebar.isSideBarOpen);
 
     return (
-        <div className="relative">
-            <div className={`${isSideBarOpen ? 'w-[78.7vw]' : 'w-[91vw]'} relative ${isSideBarOpen ? 'left-[20vw]' : 'left-[8vw]'} top-[60px] z-10`}>
+        <div className="w-full flex justify-center relative overflow-hidden">
+            <div className={`w-full relative top-[60px] z-10 pb-20 px-4 sm:px-10`}>
                 <ButtonList />
                 <VideoContainer />
             </div>

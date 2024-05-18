@@ -19,7 +19,7 @@ function SearchResults() {
     };
 
     return (
-        <div className="flex flex-col gap-y-4 pb-2 relative top-20 left-60 w-4/5">
+        <div className="w-full flex flex-col gap-y-7 sm:gap-y-10 md:gap-y-4 pb-2 relative top-16 sm:top-20 px-3 sm:px-10">
             {searchVideosList?.filter(video => video.id.kind === 'youtube#video')?.map(video => <Link to={`/watch?v=${video.id.videoId}`}><SearchResultItem key={video?.id?.videoId} video={video} /></Link>)}
         </div>
     )

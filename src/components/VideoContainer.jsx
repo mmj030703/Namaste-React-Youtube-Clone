@@ -9,9 +9,10 @@ import { updateVideos } from "../utils/store/slices/homepageVideosSlice";
 function VideoContainer() {
     const videos = useSelector(store => store.homepageVideos.videos);
     const dispatch = useDispatch();
+
     useEffect(() => {
         getPopularVideos();
-    }, [videos]);
+    }, []);
 
     const getPopularVideos = async () => {
         const data = await fetch(YOUTUBE_POPULAR_VIDEOS_API_URL);
@@ -19,9 +20,9 @@ function VideoContainer() {
 
         dispatch(updateVideos(json.items));
     };
-
+    
     return (
-        <div className="flex flex-wrap gap-x-6 gap-y-20 mt-8">
+        <div className="grid md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-x-5 gap-y-5 sm:gap-y-10 mt-8">
             {videos.length && videos?.map(video => <Link to={'/watch?v=' + video.id} key={video.id}><VideoCard videoInfo={video} /></Link>)}
         </div>
     )

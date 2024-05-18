@@ -7,8 +7,7 @@ const homepageVideosSlice = createSlice({
     },
     'reducers': {
         updateVideos: (state, action) => {
-            console.log(action.payload);
-            state.videos.push(...action.payload);
+            state.videos = action.payload;
         }
     }
 });

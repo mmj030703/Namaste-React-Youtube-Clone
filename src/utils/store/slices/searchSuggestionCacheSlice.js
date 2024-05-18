@@ -3,9 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const searchSuggestionCacheSlice = createSlice({
     'name': 'Search Suggestion Cache',
     initialState: {
-        // { 'i': ['iphone', 'i love my india'] }
-        // { 'ip': ['iphone', 'iphone max'] }
-        // { 'iph': ['iphone 12', 'iphone 12 pro max', 'iphone 12 max'] }
+        
     },
     reducers: {
         addCache: (state, action) => {

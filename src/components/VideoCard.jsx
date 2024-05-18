@@ -56,13 +56,13 @@ const VideoCard = ({ videoInfo }) => {
     };
 
     return (
-        <div className="w-fit cursor-pointer">
+        <div className="w-full md:w-fit cursor-pointer">
             <div>
-                <img className={`w-[335px] rounded-xl`} src={imageUrl} alt="thumbnail" />
+                <img className={`w-full md:w-[400px] rounded-xl`} src={imageUrl} alt="thumbnail" />
             </div>
-            <div className="mt-2">
+            <div className="hidden md:block mt-2">
                 <h3 title={title} className="max-w-[320px] font-semibold text-[15px]">{title.length <= 75 ? title : title.slice(0, 75) + "..."}</h3>
-                <p className="text-sm text-slate-600 mt-1">{channelTitle}</p>
+                <p className="text-sm text-slate-600 mt-1">{channelTitle.length <= 40 ? channelTitle : channelTitle.slice(0,40) + "..."}</p>
                 <div className="flex gap-x-2">
                     <p className="text-sm text-slate-600 mt-1">{getEditedViews(viewCount)} views</p>
                     <p className="text-sm text-slate-600 mt-1">{getEditedPublishedDate(publishedAt)}</p>
